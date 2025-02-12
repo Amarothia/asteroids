@@ -23,6 +23,7 @@ def main():
                 return # this allows the program to exit out of the main() entirely
         pygame.Surface.fill(screen, color="black")
         player_1.draw(screen)
+        player_1.update(delta_time)
         pygame.display.flip()
         delta_time = game_clock.tick(60) / 1000
 
