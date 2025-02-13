@@ -2,11 +2,12 @@
 # the open-source pygame library
 # throughout this file
 import pygame
-# then importing all from constants.py
+# then importing all from constants.py, player.py, asteroid.py, asteroidfield.py, shot.py
 from constants import *
 from player import *
 from asteroid import *
 from asteroidfield import *
+from shot import *
 
 def main():
     print("Starting asteroids!")
@@ -22,7 +23,7 @@ def main():
     Player.containers = (updatable,drawable) # this should add the player object to the groups
     Asteroid.containers = (asteroids,updatable,drawable) # this ensures every asteroid class object created is in these groups
     AsteroidField.containers = (updatable)
-    Shot.containers = (updatable, drawable)
+    Shot.containers = (shots, updatable, drawable) # shots is crucial in this as without it, there are no shot objects
     player_1 = Player(x,y) # since conatiners exist, player_1 will be added to them automatically
     asteroid_field = AsteroidField()
     pygame.init()
@@ -38,6 +39,10 @@ def main():
         for asteroid in asteroids:
             if player_1.checkForCollision(asteroid):
                 exit("Game over!")
+            for shot in shots:
+                if shot.checkForCollision(asteroid):
+                    shot.kill()
+                    asteroid.kill()
         # drawable.draw(screen) # changed player_1 to updatable
         for sprite in drawable:
             sprite.draw(screen)
