@@ -20,7 +20,9 @@ def main():
     # Player.containers = (group_a, group_b)
     Player.containers = (updatable,drawable) # this should add the player object to the groups
     Asteroid.containers = (asteroids,updatable,drawable) # this ensures every asteroid class object created is in these groups
+    AsteroidField.containers = (updatable)
     player_1 = Player(x,y) # since conatiners exist, player_1 will be added to them automatically
+    asteroid_field = AsteroidField()
     pygame.init()
     game_clock = pygame.time.Clock()
     delta_time = 0
