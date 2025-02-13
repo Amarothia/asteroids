@@ -42,7 +42,7 @@ def main():
             for shot in shots:
                 if shot.checkForCollision(asteroid):
                     shot.kill()
-                    asteroid.kill()
+                    asteroid.split()
         # drawable.draw(screen) # changed player_1 to updatable
         for sprite in drawable:
             sprite.draw(screen)
