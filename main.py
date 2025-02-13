@@ -33,12 +33,14 @@ def main():
                 return # this allows the program to exit out of the main() entirely
         pygame.Surface.fill(screen, color="black")
         updatable.update(delta_time) # changed player_1 to drawable
+        for asteroid in asteroids:
+            if player_1.checkForCollision(asteroid):
+                exit("Game over!")
         # drawable.draw(screen) # changed player_1 to updatable
         for sprite in drawable:
             sprite.draw(screen)
         pygame.display.flip()
         delta_time = game_clock.tick(60) / 1000
-
 
 
 if __name__ == "__main__":
