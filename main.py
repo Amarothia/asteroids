@@ -12,7 +12,11 @@ def main():
     print(f"Screen height: {SCREEN_HEIGHT}")
     x = SCREEN_WIDTH / 2
     y = SCREEN_HEIGHT / 2
-    player_1 = Player(x,y)
+    drawable = pygame.sprite.Group()
+    updatable = pygame.sprite.Group()
+    # Player.containers = (group_a, group_b)
+    Player.containers = (updatable,drawable) # this should add the player object to the groups
+    player_1 = Player(x,y) # since conatiners exist, player_1 will be added to them automatically
     pygame.init()
     game_clock = pygame.time.Clock()
     delta_time = 0
@@ -22,8 +26,10 @@ def main():
             if event.type == pygame.QUIT: # this is checking for program close events, like the X on a window
                 return # this allows the program to exit out of the main() entirely
         pygame.Surface.fill(screen, color="black")
-        player_1.draw(screen)
-        player_1.update(delta_time)
+        updatable.update(delta_time) # changed player_1 to drawable
+        # drawable.draw(screen) # changed player_1 to updatable
+        for sprite in drawable:
+            sprite.draw(screen)
         pygame.display.flip()
         delta_time = game_clock.tick(60) / 1000
 
